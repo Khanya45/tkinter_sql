@@ -2,7 +2,7 @@ import mysql.connector
 from tkinter import *
 from tkinter import messagebox
 
-mydb = mysql.connector.connect(user='lifechoices', password='@Lifechoices1234', host='127.0.0.1', database='hospital', auth_plugin='mysql_native_password')
+mydb = mysql.connector.connect(user='lifechoices', password='@Lifechoices1234', host='127.0.0.1', database='dbLifechoicesOnline', auth_plugin='mysql_native_password')
 mycursor = mydb.cursor(buffered=True)
 
 
@@ -10,7 +10,7 @@ root = Tk()
 root.geometry('350x300')
 
 def login():
-    mycursor.execute('SELECT user, password FROM tblLogin WHERE user="'+edtUsername.get()+'" AND password="'+edtPassword.get()+'"')
+    mycursor.execute('SELECT name, password FROM tblAdmin WHERE user="'+edtUsername.get()+'" AND password="'+edtPassword.get()+'"')
     count = 0
     try:
         for i in mycursor:
@@ -27,7 +27,8 @@ def login():
 
 def newuser():
     count = 0
-    mycursor.execute('INSERT INTO tblLogin (user, password) VALUES("'+edtUsername.get()+'","' + edtPassword.get()+'")')
+    mycursor.execute('INSERT INTO tblUser (Name, Surname, ID,Mobile) VALUES ("khanya", "gope","0210160451089","0814450796")')
+    mycursor.execute('INSERT INTO tblNextOfKin (Name, Surname,Mobile,User_id) VALUES (("veronica", "gope","0823450796", SELECT User_id FROM tblUser WHERE ID= "+edtID.get()+"'))
     messagebox.showinfo("", "successfully added")
     mydb.commit()
 
@@ -41,6 +42,7 @@ lbUsername = Label(root, text="Username")
 lbUsername.place(x=40, y=50)
 edtUsername = Entry(root)
 edtUsername.place(x=150, y=50)
+
 
 lbPassword = Label(root, text="Password")
 lbPassword.place(x=40, y=90)
