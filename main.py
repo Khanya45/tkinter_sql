@@ -28,7 +28,7 @@ def login():
 def newuser():
     count = 0
     mycursor.execute('INSERT INTO tblUser (Name, Surname, ID,Mobile) VALUES ("khanya", "gope","0210160451089","0814450796")')
-    mycursor.execute('INSERT INTO tblNextOfKin (Name, Surname,Mobile,User_id) VALUES (("veronica", "gope","0823450796", SELECT User_id FROM tblUser WHERE ID= "+edtID.get()+"'))
+    mycursor.execute('INSERT INTO tblNextOfKin (Name, Surname,Mobile,User_id) VALUES (("veronica", "gope","0823450796", SELECT User_id FROM tblUser WHERE ID= "+edtID.get()+"))')
     messagebox.showinfo("", "successfully added")
     mydb.commit()
 
